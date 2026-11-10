@@ -207,3 +207,7 @@ Python compilation checks were also completed for the modified application and e
 The current local test mode uses predefined rule-based responses. Live LLM answer generation, production deployment, and any security tests not supported by recorded execution evidence remain outside the completed scope.
 
 **Project classification:** Educational RAG prototype — local implementation and manually reviewed evaluation completed.
+
+
+## Application Screenshot
+![Cited HR Policy Assistant](screenshots/cited_answer.png)
