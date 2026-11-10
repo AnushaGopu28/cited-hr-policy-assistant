@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+index/
+eval/run_outputs.csv
+.DS_Store
+venv/
+index_backup/
+eval/run_eval_before_retrieval_hit_fix.py
+eval/run_outputs_before_expense_fix.csv
+eval/run_outputs_before_q07_fix.csv
+corpus/*.pdf
+app/*_before*.py
+app/*_backup*.py

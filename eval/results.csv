@@ -1,0 +1,26 @@
+question_id,category,actual_answer,retrieved_source_ids,groundedness_0_2,relevance_0_2,refusal_correct_0_1,retrieval_hit_0_1,reviewer_notes
+Q01,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q02,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q03,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q04,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q05,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q06,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q07,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q08,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q09,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q10,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q11,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q12,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q13,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q14,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q15,answerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q16,unanswerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q17,unanswerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q18,unanswerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q19,unanswerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q20,unanswerable,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q21,determination,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q22,determination,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q23,determination,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q24,determination,PENDING,,,,,,Run app/evaluation; do not invent scores.
+Q25,determination,PENDING,,,,,,Run app/evaluation; do not invent scores.

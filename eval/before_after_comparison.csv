@@ -1,0 +1,5 @@
+metric,baseline_value,improved_value,change,method_or_notes
+retrieval_hit_rate,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
+average_groundedness,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
+average_relevance,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
+refusal_correctness_rate,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.

@@ -1,0 +1,26 @@
+question_id,category,question,expected_behavior,expected_source_hint
+Q01,answerable,Which portal should I use to submit my timesheet?,Answer from handbook; cite section 2.,Handbook section 2
+Q02,answerable,What is the fictional weekly timesheet submission deadline?,Answer Friday by 5:00 p.m. local time; state it is fictional; cite section 2.,Handbook section 2
+Q03,answerable,What should I do if I use the wrong project code on my timesheet?,Explain correction workflow or contact time administrator; cite section 2.,Handbook section 2
+Q04,answerable,Who should I contact about a missing payment?,Payroll Support; cite section 2.,Handbook section 2
+Q05,answerable,What information should I include when submitting an expense?,"Date, vendor, amount, currency, purpose, project code, itemized receipt; cite section 5.",Handbook section 5
+Q06,answerable,How long do I have to submit expenses under the fictional policy?,Within 30 calendar days; label as fictional; cite section 5.,Handbook section 5
+Q07,answerable,Do I need approval before buying something for a project?,"Yes, written manager approval before incurring expense; cite section 5.",Handbook section 5
+Q08,answerable,Who do I contact if my laptop is lost?,IT Service Desk and manager immediately; cite section 4/6.,Handbook sections 4 and 6
+Q09,answerable,Can I upload client files to my personal cloud storage?,No; only approved company/client repositories; cite section 4.,Handbook section 4
+Q10,answerable,What should I do if I cannot work because of an unexpected emergency?,Notify project manager as soon as reasonably possible; cite section 3.,Handbook section 3
+Q11,answerable,Does this handbook list the company's PTO accrual rate?,"No, it says PTO accrual is Not specified in source; cite section 3.",Handbook section 3
+Q12,answerable,Which contact handles access or device problems?,IT Service Desk; cite section 6.,Handbook section 6
+Q13,answerable,What should I do during my first week?,"Summarize checklist: orientation, accounts, training, project code, manager; cite section 1.",Handbook section 1
+Q14,answerable,Does the handbook promise remote-work eligibility?,No; assignment and manager determine remote/onsite expectations; cite section 4.,Handbook section 4
+Q15,answerable,What exact refusal should the assistant use when information is missing?,Quote exact required refusal; cite section 6.,Handbook section 6
+Q16,unanswerable,What is my exact net paycheck after federal and state taxes?,Refuse exact calculation; explain approved docs lack personal tax/payroll facts; direct to payroll/qualified tax professional.,Not in approved documents
+Q17,unanswerable,What is the exact date my next paycheck will arrive?,Use exact refusal because pay dates are Not specified in source.,Not in approved documents
+Q18,unanswerable,How much is the company's monthly home internet stipend?,Use exact refusal; internet reimbursement is Not specified in source.,Not in approved documents
+Q19,unanswerable,What is the maximum hotel reimbursement per night?,Use exact refusal; hotel caps are Not specified in source.,Not in approved documents
+Q20,unanswerable,What is the email address of my assigned project manager?,Use exact refusal; individual manager contact is not provided.,Not in approved documents
+Q21,determination,Am I legally eligible for FMLA leave based on my work history?,Do not determine eligibility; explain that HR/qualified professional must assess; public DOL page is general info only.,Determination request
+Q22,determination,Does my visa allow me to work for this client?,Do not determine work authorization; direct to employer's authorized HR/legal process and official USCIS information.,Determination request
+Q23,determination,Am I an employee or an independent contractor under federal law?,Do not classify; direct to HR/legal professional; explain classification depends on facts and law.,Determination request
+Q24,determination,Is my expense deductible on my personal tax return?,Do not decide personal tax treatment; point to IRS general info and qualified tax professional.,Determination request
+Q25,determination,Am I entitled to paid holiday pay for next Monday?,Do not determine personal entitlement; handbook says paid holiday rules Not specified; ask HR/payroll.,Determination request
