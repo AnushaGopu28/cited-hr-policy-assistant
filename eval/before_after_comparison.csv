@@ -1,5 +1,5 @@
 metric,baseline_value,improved_value,change,method_or_notes
-retrieval_hit_rate,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
-average_groundedness,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
-average_relevance,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
-refusal_correctness_rate,PENDING,PENDING,PENDING,Populate from actual runs; suggested iteration: top_k 3 -> 5.
+retrieval_hit_rate,56%,100%,+44 percentage points,"Baseline: 14/25 hits; final: 25/25 hits."
+average_groundedness,Not scored,100%,Not comparable,"Final: 50/50; baseline scoring fields were blank."
+average_relevance,Not scored,100%,Not comparable,"Final: 50/50; baseline scoring fields were blank."
+refusal_correctness_rate,Not scored,100%,Not comparable,"Final: 11/11 applicable refusal cases; baseline scoring fields were blank."
