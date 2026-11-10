@@ -210,4 +210,9 @@ The current local test mode uses predefined rule-based responses. Live LLM answe
 
 
 ## Application Screenshot
+
+### Application Interface
 ![Cited HR Policy Assistant](screenshots/cited_answer.png)
+
+### Assistant Response and Retrieved References
+[View Full Assistant Response](screenshots/cited_response.pdf)
