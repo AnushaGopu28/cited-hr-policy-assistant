@@ -29,9 +29,9 @@ STOP_WORDS = {
     "is", "are", "was", "were", "the", "a", "an",
     "of", "for", "to", "in", "on", "at", "by",
     "and", "or", "can", "do", "does", "did",
-    "be", "being", "been", "with", "from"
+    "be", "being", "been", "with", "from",
     "should", "my", "your", "our", "their", "during",
-    "include", "when", "which", "this", "that"
+    "include", "which", "this", "that"
 }
 
 
@@ -50,23 +50,66 @@ def load():
     return idx, chunks
 
 
-def tokenize(text):
-    """Normalize text into searchable terms."""
-    words = re.findall(r"[a-z0-9]+", text.lower())
+def normalize_word(word):
+    """Apply lightweight, general word-form normalization."""
+    if word.startswith("complet"):
+        return "complet"
 
-    normalized = []
+    if len(word) > 5 and word.endswith("ing"):
+        word = word[:-3]
+        if len(word) > 2 and word[-1] == word[-2]:
+            word = word[:-1]
+        return word
+
+    if len(word) > 4 and word.endswith("ies"):
+        return word[:-3] + "y"
+
+    if len(word) > 4 and word.endswith(
+        ("ches", "shes", "xes", "zes", "sses", "oes")
+    ):
+        return word[:-2] if word.endswith(("ches", "shes", "xes", "zes", "sses", "oes")) else word[:-1]
+
+    if len(word) > 3 and word.endswith("s") and not word.endswith("ss"):
+        return word[:-1]
+
+    return word
+
+SYNONYMS = {
+    "paid": {"reimburse", "reimbursement"},
+    "back": {"reimburse", "reimbursement"},
+    "reimbursed": {"reimburse", "reimbursement"},
+    "reimbursement": {"reimburse", "expense", "submission", "submit"},
+    "reimburse": {"reimbursement", "expense", "submission", "submit"},
+    "detail": {"information", "provide"},
+    "cutoff": {"deadline"},
+    "weekly": {"week"},
+    "hour": {"time"},
+    "timesheet": {"time"},
+    "submit": {"submission"},
+    "submitted": {"submit", "submission"},
+    "submission": {"submit"},
+    "customer": {"client", "work"},
+    "document": {"file", "work"},
+    "drive": {"storage", "repository"},
+    "google": {"personal", "storage"},
+    "save": {"store", "upload"},
+    "cloud": {"storage", "repository"},
+}
+
+def tokenize(text):
+    """Normalize text and expand common workplace synonyms."""
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    terms = set()
 
     for word in words:
         if word in STOP_WORDS:
             continue
 
-        if word.startswith("complet"):
-            word = "complet"
+        normalized = normalize_word(word)
+        terms.add(normalized)
+        terms.update(SYNONYMS.get(normalized, set()))
 
-        normalized.append(word)
-
-    return normalized
-
+    return sorted(terms)
 
 def keyword_score(query, text, section="", source_title=""):
     """Score keyword overlap separately for passage text and metadata."""
@@ -84,10 +127,10 @@ def keyword_score(query, text, section="", source_title=""):
     source_score = len(query_terms & source_terms) / len(query_terms)
 
     return min(
-        1.0,
-        (0.40 * body_score)
-        + (0.50 * section_score)
-        + (0.10 * source_score)
+    1.0,
+    (0.70 * body_score)
+    + (0.20 * section_score)
+    + (0.10 * source_score)
     )
 
 def retrieve(query, top_k=None):

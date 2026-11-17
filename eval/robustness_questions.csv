@@ -1,0 +1,16 @@
+﻿question_id,category,question,expected_source_hint
+P01,paraphrase,Where am I supposed to log the hours I worked?,Handbook section 2
+P02,paraphrase,What's the weekly cutoff for getting my hours submitted?,Handbook section 2
+P03,paraphrase,I charged my hours to the wrong project. How can I fix that?,Handbook section 2
+P04,paraphrase,My pay didn't arrive. Who can help me?,Handbook section 2
+P05,paraphrase,What details do I need when I ask to get a work expense paid back?,Handbook section 5
+P06,paraphrase,How many days after buying something can I still submit the expense?,Handbook section 5
+P07,paraphrase,Can I buy project supplies first and ask my manager afterward?,Handbook section 5
+P08,paraphrase,My company laptop has gone missing. Who needs to know?,Handbook sections 4 and 6
+P09,paraphrase,Is it okay to save customer documents in my own Google Drive?,Handbook section 4
+P10,paraphrase,Something unexpected means I cannot work today. Who should I tell?,Handbook section 3
+C01,cross_policy,"I need to buy supplies for my project and submit the cost. What approval do I need, and what information belongs in the expense submission?",Handbook section 5
+C02,cross_policy,"My laptop was stolen and I cannot access the timesheet portal. Who should I notify, and when are weekly timesheets due?","Handbook sections 2, 4, and 6"
+C03,cross_policy,"I have an emergency and cannot work today. Who should I notify, and does the handbook guarantee that I can work remotely afterward?",Handbook sections 3 and 4
+C04,cross_policy,I used the wrong project code on my timesheet and also submitted a project expense. What should I do about each issue?,Handbook sections 2 and 5
+C05,cross_policy,"I'm new to the assignment. What should I complete during my first week, including account setup, security training, and time-entry preparation?",Handbook section 1

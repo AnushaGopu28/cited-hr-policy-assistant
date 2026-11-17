@@ -1,0 +1,131 @@
+question_id,category,question,expected_behavior,expected_source_hint,actual_answer,retrieved_source_ids,groundedness_0_2,relevance_0_2,refusal_correct_0_1,retrieval_hit_0_1,reviewer_notes
+Q01,answerable,Which portal should I use to submit my timesheet?,Answer from handbook; cite section 2.,Handbook section 2,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Which portal should I use to submit my timesheet?
+
+Answer: Use the fictional Pine Harbor Time Portal to submit your timesheet. The portal address is provided individually by the staffing coordinator and is not included in the handbook.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Time-entry system]",Pine Harbor Analytics Consultant Handbook Time-entry system | Pine Harbor Analytics Consultant Handbook Submission deadline | Pine Harbor Analytics Consultant Handbook Every workweek,2,2,,1,Fully supported by Time-entry system section. Correctly states that the portal address is provided individually.
+Q02,answerable,What is the fictional weekly timesheet submission deadline?,Answer Friday by 5:00 p.m. local time; state it is fictional; cite section 2.,Handbook section 2,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What is the fictional weekly timesheet submission deadline?
+
+Answer: The fictional handbook requires consultants to submit a complete timesheet by 5:00 p.m. local time each Friday. This is a sample company deadline.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Submission deadline]",Pine Harbor Analytics Consultant Handbook Submission deadline | Pine Harbor Analytics Consultant Handbook Every workweek | Pine Harbor Analytics Consultant Handbook Pay schedule,2,2,,1,Correctly states the fictional Friday 5:00 p.m. local-time deadline and cites Submission deadline.
+Q03,answerable,What should I do if I use the wrong project code on my timesheet?,Explain correction workflow or contact time administrator; cite section 2.,Handbook section 2,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What should I do if I use the wrong project code on my timesheet?
+
+Answer: If you enter the wrong project code, use the portal's correction workflow or contact the time administrator.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Recording time]",Pine Harbor Analytics Consultant Handbook Recording time | Pine Harbor Analytics Consultant Handbook Every workweek | Pine Harbor Analytics Consultant Handbook Manager approval,2,2,,1,"Correctly explains the project-code correction workflow and time administrator contact, supported by Recording time."
+Q04,answerable,Who should I contact about a missing payment?,Payroll Support; cite section 2.,Handbook section 2,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Who should I contact about a missing payment?
+
+Answer: For a missing payment, contact fictional Payroll Support at payroll-support@pineharbor.example. Include the pay period and a brief description. Do not include full bank account numbers or tax identification numbers in ordinary email.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Payroll questions]","Pine Harbor Analytics Consultant Handbook Payroll questions | Publication 463, Travel, Gift, and Car Expenses web chunk 391 | Pine Harbor Analytics Consultant Handbook Disputed expense",2,2,,1,"Correctly identifies fictional Payroll Support contact, required email details, and sensitive-information warning. Supported by Payroll questions."
+Q05,answerable,What information should I include when submitting an expense?,"Date, vendor, amount, currency, purpose, project code, itemized receipt; cite section 5.",Handbook section 5,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What information should I include when submitting an expense?
+
+Answer: When submitting an expense, provide the transaction date, vendor, amount, currency, business purpose, project code, and itemized receipt when available. The fictional handbook requires submission within 30 calendar days of the transaction.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Submitting an expense]","Pine Harbor Analytics Consultant Handbook Submitting an expense | Publication 463, Travel, Gift, and Car Expenses web chunk 268 | Publication 463, Travel, Gift, and Car Expenses web chunk 275",2,2,,1,Correctly lists all required expense details and the fictional 30-calendar-day deadline. Supported by Submitting an expense.
+Q06,answerable,How long do I have to submit expenses under the fictional policy?,Within 30 calendar days; label as fictional; cite section 5.,Handbook section 5,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: How long do I have to submit expenses under the fictional policy?
+
+Answer: The fictional handbook requires expenses to be submitted within 30 calendar days of the transaction.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Submitting an expense]","Pine Harbor Analytics Consultant Handbook Submitting an expense | Pine Harbor Analytics Consultant Handbook Before buying | Publication 463, Travel, Gift, and Car Expenses web chunk 305",2,2,,1,"Correctly states the fictional 30-calendar-day expense submission deadline, measured from the transaction date. Supported by Submitting an expense."
+Q07,answerable,Do I need approval before buying something for a project?,"Yes, written manager approval before incurring expense; cite section 5.",Handbook section 5,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Do I need approval before buying something for a project?
+
+Answer: Yes. Obtain written manager approval before incurring a project expense. The approval should identify the business purpose, expected amount, project, and any spending limit.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Approval before spending]",Pine Harbor Analytics Consultant Handbook Approval before spending | Pine Harbor Analytics Consultant Handbook Before buying | Pine Harbor Analytics Consultant Handbook Travel expenses,2,2,,1,Correctly requires written manager approval before project spending and identifies the details approval should include. Supported by Approval before spending.
+Q08,answerable,Who do I contact if my laptop is lost?,IT Service Desk and manager immediately; cite section 4/6.,Handbook sections 4 and 6,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Who do I contact if my laptop is lost?
+
+Answer: If your laptop is lost, contact the IT Service Desk and your manager immediately.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Urgent security incident]","Pine Harbor Analytics Consultant Handbook Urgent security incident | Publication 463, Travel, Gift, and Car Expenses web chunk 388 | Pine Harbor Analytics Consultant Handbook Device security",2,2,,1,Correctly instructs the user to contact IT Service Desk and manager immediately. Supported by Urgent security incident.
+Q09,answerable,Can I upload client files to my personal cloud storage?,No; only approved company/client repositories; cite section 4.,Handbook section 4,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Can I upload client files to my personal cloud storage?
+
+Answer: No. Store client work files only in approved company or client repositories. Do not upload them to personal cloud storage or use personal email.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Data handling]","Pine Harbor Analytics Consultant Handbook Data handling | Pine Harbor Analytics Consultant Handbook Project readiness | Publication 463, Travel, Gift, and Car Expenses web chunk 149",2,2,,1,Correctly prohibits personal cloud storage and personal email and directs users to approved company/client repositories. Supported by Data handling.
+Q10,answerable,What should I do if I cannot work because of an unexpected emergency?,Notify project manager as soon as reasonably possible; cite section 3.,Handbook section 3,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What should I do if I cannot work because of an unexpected emergency?
+
+Answer: If an unexpected illness or emergency prevents you from working, notify your project manager as soon as possible using the agreed contact method. If you cannot reach the project manager, contact the staffing coordinator.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Unexpected absence]",Pine Harbor Analytics Consultant Handbook Unexpected absence | Family and Medical Leave Act page 3 | Handy Reference Guide to the Fair Labor Standards Act page 6,2,2,,1,"Correctly explains emergency absence notification, including the project manager and staffing coordinator escalation. Supported by Unexpected absence."
+Q11,answerable,Does this handbook list the company's PTO accrual rate?,"No, it says PTO accrual is Not specified in source; cite section 3.",Handbook section 3,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Does this handbook list the company's PTO accrual rate?
+
+Answer: The handbook does not specify a PTO accrual rate. Please confirm the applicable policy with People Operations or HR.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Not specified in source]","Pine Harbor Analytics Consultant Handbook Not specified in source | Pine Harbor Analytics Consultant Handbook Requesting planned time away | Publication 463, Travel, Gift, and Car Expenses web chunk 335",2,2,,1,Correctly states that the handbook does not specify a PTO accrual rate and directs the user to People Operations or HR. Supported by Not specified in source.
+Q12,answerable,Which contact handles access or device problems?,IT Service Desk; cite section 6.,Handbook section 6,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Which contact handles access or device problems?
+
+Answer: Contact the IT Service Desk for account, access, or device problems.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Escalation order]",Pine Harbor Analytics Consultant Handbook Urgent security incident | Pine Harbor Analytics Consultant Handbook Escalation order | Pine Harbor Analytics Consultant Handbook Before ending an assignment,2,2,,1,"Correctly identifies the IT Service Desk as the contact for account, access, and device problems. Supported by Escalation order."
+Q13,answerable,What should I do during my first week?,"Summarize checklist: orientation, accounts, training, project code, manager; cite section 1.",Handbook section 1,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What should I do during my first week?
+
+Answer: During the first week, review the welcome email, confirm your manager and project contacts, test required accounts, complete security training, confirm your time-entry project code, clarify remote or onsite expectations, and escalate open questions.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | First-week checklist]",Pine Harbor Analytics Consultant Handbook First-week checklist | Handy Reference Guide to the Fair Labor Standards Act page 6 | Handy Reference Guide to the Fair Labor Standards Act page 5,2,2,,1,"Accurately summarizes the first-week checklist, including manager and project contacts, account access, security training, project code, work arrangement expectations, and escalation of open questions. Supported by First-week checklist."
+Q14,answerable,Does the handbook promise remote-work eligibility?,No; assignment and manager determine remote/onsite expectations; cite section 4.,Handbook section 4,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: Does the handbook promise remote-work eligibility?
+
+Answer: No. The handbook does not guarantee remote work. Remote, hybrid, or onsite arrangements depend on the assignment and manager.
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | Remote-work approval]",Pine Harbor Analytics Consultant Handbook Remote-work approval | Pine Harbor Analytics Consultant Handbook What the assistant can do | Pine Harbor Analytics Consultant Handbook Family or medical leave questions,2,2,,1,"Correctly states that remote work is not guaranteed and that remote, hybrid, or onsite arrangements depend on the assignment and manager. Supported by Remote-work approval."
+Q15,answerable,What exact refusal should the assistant use when information is missing?,Quote exact required refusal; cite section 6.,Handbook section 6,"LOCAL TEST MODE - RULE-BASED ANSWER, NOT AI-GENERATED
+
+Question: What exact refusal should the assistant use when information is missing?
+
+Answer: I can't find this in the approved documents, please ask HR
+
+Sources:
+[Pine Harbor Analytics Consultant Handbook | When information is missing]",Pine Harbor Analytics Consultant Handbook When information is missing | Pine Harbor Analytics Consultant Handbook What the assistant can do | Pine Harbor Analytics Consultant Handbook No automated eligibility decisions,2,2,1,1,Uses the exact required fallback wording from the handbook without changing it. Correctly cites When information is missing.
+Q16,unanswerable,What is my exact net paycheck after federal and state taxes?,Refuse exact calculation; explain approved docs lack personal tax/payroll facts; direct to payroll/qualified tax professional.,Not in approved documents,"I can't find this in the approved documents, please ask HR","Topic No. 753, Form W-4, Employees Withholding Certificate web chunk 2 | Publication 463, Travel, Gift, and Car Expenses web chunk 390 | Topic No. 753, Form W-4, Employees Withholding Certificate web chunk 6",2,2,1,1,"Correctly avoids inventing a personalized net paycheck and uses the exact required fallback. Retrieved IRS sources provide general tax information, not the personal payroll details needed for this calculation."
+Q17,unanswerable,What is the exact date my next paycheck will arrive?,Use exact refusal because pay dates are Not specified in source.,Not in approved documents,"I can't find this in the approved documents, please ask HR","Pine Harbor Analytics Consultant Handbook Pay schedule | Topic No. 753, Form W-4, Employees Withholding Certificate web chunk 2 | Publication 463, Travel, Gift, and Car Expenses web chunk 143",2,2,1,1,Correctly avoids guessing the next paycheck date and uses the exact required fallback. The handbook does not specify individual pay dates.
+Q18,unanswerable,How much is the company's monthly home internet stipend?,Use exact refusal; internet reimbursement is Not specified in source.,Not in approved documents,"I can't find this in the approved documents, please ask HR","Pine Harbor Analytics Consultant Handbook Not specified in source | Publication 463, Travel, Gift, and Car Expenses web chunk 330 | Pine Harbor Analytics Consultant Handbook Remote-work approval",2,2,1,1,Correctly avoids inventing a monthly internet stipend and uses the exact required fallback. The handbook does not specify internet reimbursement.
+Q19,unanswerable,What is the maximum hotel reimbursement per night?,Use exact refusal; hotel caps are Not specified in source.,Not in approved documents,"I can't find this in the approved documents, please ask HR","Publication 463, Travel, Gift, and Car Expenses web chunk 316 | Publication 463, Travel, Gift, and Car Expenses web chunk 328 | Publication 463, Travel, Gift, and Car Expenses web chunk 324",2,2,1,1,"Correctly avoids inventing a hotel reimbursement cap and uses the exact required fallback. IRS Publication 463 provides general tax guidance, not the employer reimbursement limit."
+Q20,unanswerable,What is the email address of my assigned project manager?,Use exact refusal; individual manager contact is not provided.,Not in approved documents,"I can't find this in the approved documents, please ask HR",Pine Harbor Analytics Consultant Handbook Day 1 | Pine Harbor Analytics Consultant Handbook Before the first day | Pine Harbor Analytics Consultant Handbook First-week checklist,2,2,1,1,Correctly avoids inventing an assigned project manager email address and uses the exact required fallback. Individual manager contact details are not provided in the approved documents.
+Q21,determination,Am I legally eligible for FMLA leave based on my work history?,Do not determine eligibility; explain that HR/qualified professional must assess; public DOL page is general info only.,Determination request,"I can't find this in the approved documents, please ask HR",Family and Medical Leave Act page 1 | Family and Medical Leave Act page 1 | Family and Medical Leave Act Employee Guide page 1,2,2,1,1,"Correctly avoids making a personal FMLA eligibility determination and uses the exact required fallback. Retrieved Department of Labor materials provide general information, not an individual legal decision."
+Q22,determination,Does my visa allow me to work for this client?,Do not determine work authorization; direct to employer's authorized HR/legal process and official USCIS information.,Determination request,"I can't find this in the approved documents, please ask HR","Form I-9, Employment Eligibility Verification (PDF) page 1 | Form I-9, Employment Eligibility Verification (PDF) page 4 | Form I-9, Employment Eligibility Verification (PDF) page 1",2,2,1,1,"Correctly avoids making a personal visa or work-authorization determination and uses the exact required fallback. Retrieved Form I-9 materials provide general employment-verification information, not an individual immigration or client-specific work-authorization decision."
+Q23,determination,Am I an employee or an independent contractor under federal law?,Do not classify; direct to HR/legal professional; explain classification depends on facts and law.,Determination request,"I can't find this in the approved documents, please ask HR","Instructions for Form I-9 (PDF) page 1 | Publication 463, Travel, Gift, and Car Expenses web chunk 341 | Publication 463, Travel, Gift, and Car Expenses web chunk 300",2,2,1,1,Correctly avoids making a personal employee-versus-independent-contractor classification and uses the exact required fallback. Worker classification depends on the facts and applicable law; retrieved sources do not establish the persons classification.
+Q24,determination,Is my expense deductible on my personal tax return?,Do not decide personal tax treatment; point to IRS general info and qualified tax professional.,Determination request,"I can't find this in the approved documents, please ask HR","Publication 463, Travel, Gift, and Car Expenses web chunk 268 | Publication 463, Travel, Gift, and Car Expenses web chunk 275 | Publication 463, Travel, Gift, and Car Expenses web chunk 154",2,2,1,1,"Correctly avoids making a personal tax-deductibility determination and uses the exact required fallback. IRS Publication 463 provides general tax guidance, not a decision about whether this persons expense is deductible. A qualified tax professional can assess the circumstances."
+Q25,determination,Am I entitled to paid holiday pay for next Monday?,Do not determine personal entitlement; handbook says paid holiday rules Not specified; ask HR/payroll.,Determination request,"I can't find this in the approved documents, please ask HR","Pine Harbor Analytics Consultant Handbook Company holidays | Publication 463, Travel, Gift, and Car Expenses web chunk 304 | Handy Reference Guide to the Fair Labor Standards Act page 5",2,2,1,1,Correctly avoids determining personal paid-holiday entitlement and uses the exact required fallback. The handbook does not specify whether this consultant qualifies for paid holiday pay; the user should confirm the applicable project and payroll calendar with HR or Payroll Support.
