@@ -96,6 +96,14 @@ python -m app.ingest
 
 This processes the configured documents, generates embeddings, and creates the local search index.
 
+### Launch the Streamlit application
+
+Run from the project root:
+
+```cmd
+streamlit run app/app.py
+```
+
 ### Run the evaluation
 
 ```cmd
@@ -157,6 +165,10 @@ The 25-question evaluation and its manually reviewed scores are separate from li
 Four limited security tests were executed through the local Ollama path and are recorded in `eval/security_tests.csv`. These tests do not constitute comprehensive security validation.
 
 Do not report estimated token usage, API costs, or external API usage as actual results. Local Ollama usage should be described separately from paid API usage.
+## AI Assistant Usage
+
+AI assistants, including ChatGPT, were used as development support for understanding RAG concepts, troubleshooting Python and Streamlit issues, reviewing retrieval and prompt logic, improving documentation, and interpreting evaluation results. The project code, configuration, tests, and results were reviewed and run by the developer. AI-generated suggestions were checked against the project requirements and observed test outputs. AI assistance was not treated as an authoritative source for HR, legal, tax, or immigration policy.
+
 ## 8. Security, Privacy, and Responsible Use
 
 The project follows these principles:
@@ -232,6 +244,9 @@ These measurements describe retrieval ranking on this specific 15-question test 
 ## Application Screenshot
 ### Application Interface
 ![Cited HR Policy Assistant](screenshots/cited_answer.png)
+
+### Unanswerable Question and Refusal
+![Assistant refusal when information is not in the approved documents](screenshots/unanswerable_refusal.png)
 
 ### Assistant Response and Retrieved References
 [View Full Assistant Response](screenshots/cited_response.pdf)
