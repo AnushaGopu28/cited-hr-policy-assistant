@@ -235,3 +235,13 @@ These measurements describe retrieval ranking on this specific 15-question test 
 
 ### Assistant Response and Retrieved References
 [View Full Assistant Response](screenshots/cited_response.pdf)
+
+### Live Ollama Model Evidence
+
+The following screenshots document the local Ollama model and its use with the Streamlit application:
+
+![Ollama model running](screenshots/ollama_model_running.png)
+
+![Live application answer](screenshots/ollama_live_app_answer.png)
+
+![Ollama model active after application answer](screenshots/ollama_app_model_active.png)

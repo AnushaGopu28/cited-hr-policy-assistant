@@ -8,3 +8,4 @@ pypdf>=4.2
 openai>=1.40
 reportlab>=4.2
 rank-bm25>=0.2.2
+python-dotenv>=1.0
