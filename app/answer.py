@@ -609,15 +609,6 @@ def answer_question(question, passages):
         if not answer or answer.startswith(FALLBACK):
             return FALLBACK
 
-        # Ensure the answer includes citations from the approved context.
-        if "[SOURCE:" not in answer and "Citation:" not in answer and passages:
-            source = passages[0]
-            citation = (
-                f"[Source: {source.get('source_title', 'Unknown source')}, "
-                f"{source.get('section_or_page', 'Unknown section')}]"
-            )
-            answer = answer.rstrip() + "\n\n" + citation
-
         return answer
 
     except requests.exceptions.RequestException as exc:

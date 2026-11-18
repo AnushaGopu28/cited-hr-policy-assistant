@@ -108,7 +108,7 @@ The evaluation outputs are written to:
 eval/run_outputs.csv
 ```
 
-The local evaluation does not require a paid OpenAI API call when `LOCAL_TEST_MODE=true` is configured.
+The retrieval evaluation runs locally and does not require a paid OpenAI API call. Answer generation is configured to use the local Ollama model when `LOCAL_TEST_MODE=false`.
 
 ## 6. Evaluation Methodology
 
@@ -141,20 +141,22 @@ The evaluation outputs were reviewed manually. Groundedness, relevance, refusal 
 
 These results describe this specific 25-question test set and the outputs reviewed. They do not establish production readiness or guarantee performance on other questions or documents.
 
-## 7. Local Test Mode and AI Disclosure
+## 7. Local Model Configuration and AI Disclosure
 
 The current project configuration uses:
 
 ```text
-LOCAL_TEST_MODE=true
+OLLAMA_MODEL=llama3.2:3b
+LOCAL_TEST_MODE=false
 ```
 
-In this mode, the application uses predefined rule-based responses for local testing. These responses are not live AI-generated answers from an external chat model.
+The application uses the locally hosted Ollama model `llama3.2:3b` for answer generation. This integration does not require a paid external chat-model API.
 
-The project includes RAG-related components such as document ingestion, embeddings, vector indexing, and retrieval. However, the completed local evaluation should not be described as a live LLM answer-generation evaluation.
+The 25-question evaluation and its manually reviewed scores are separate from live Ollama testing. The 25-question results must not be described as a 25-question live LLM evaluation.
 
-A live chat-model integration, if configured separately, must be evaluated independently. Record the actual provider, model name, token usage, and cost only after a real model run. Do not report estimated or invented usage as actual results.
+Four limited security tests were executed through the local Ollama path and are recorded in `eval/security_tests.csv`. These tests do not constitute comprehensive security validation.
 
+Do not report estimated token usage, API costs, or external API usage as actual results. Local Ollama usage should be described separately from paid API usage.
 ## 8. Security, Privacy, and Responsible Use
 
 The project follows these principles:
@@ -170,14 +172,14 @@ The project follows these principles:
 
 The assistant cannot approve expenses, leave, payroll changes, or access requests.
 
-Security test cases are maintained in `eval/security_tests.csv`. Listing a test case does not establish that it passed. Actual execution results must be recorded separately.
+Four limited security tests were executed through the live local Ollama path. All four are recorded as passing in `eval/security_tests.csv`. This is limited evidence, not comprehensive security validation.
 
 ## 9. Known Limitations
 
 - The handbook is fictional and intended only for training.
 - Public government reference pages are not company policy.
 - One public source failed to download during the recorded ingestion run.
-- The current local test mode uses predefined rule-based responses rather than live LLM-generated answers.
+- Answer generation uses a locally hosted Ollama model; performance and security results are limited to the tests documented in this repository.
 - Evaluation results are based on a limited set of 25 questions.
 - Retrieval success does not independently guarantee answer correctness.
 - The project is not a production HR assistant and should not be used to make real employment or compliance decisions.
@@ -187,8 +189,8 @@ Security test cases are maintained in `eval/security_tests.csv`. Listing a test 
 Potential improvements include:
 
 - Expand the evaluation set with additional answerable, unanswerable, and determination questions.
-- Evaluate live LLM answer generation separately from local rule-based testing.
-- Improve retrieval quality through measured chunk-size and `top_k` comparisons.
+- Expand live Ollama answer-quality testing with more employee-style paraphrases and cross-policy questions.
+- Continue evaluating retrieval changes against a broader, independently worded test set.
 - Add automated regression tests for retrieval, citations, fallback behavior, and security boundaries.
 - Retry or replace unavailable public sources and record source freshness.
 - Add broader security testing and document the actual results.
@@ -204,13 +206,30 @@ The 25-question evaluation was completed and manually reviewed. The recorded res
 
 Python compilation checks were also completed for the modified application and evaluation modules.
 
-The current local test mode uses predefined rule-based responses. Live LLM answer generation, production deployment, and any security tests not supported by recorded execution evidence remain outside the completed scope.
+The application is configured for local Ollama answer generation. Four limited Ollama security tests have been recorded. The 25-question evaluation is separate and should not be interpreted as a live Ollama answer-quality evaluation. Production deployment and comprehensive security validation remain outside the completed scope.
 
 **Project classification:** Educational RAG prototype — local implementation and manually reviewed evaluation completed.
 
 
-## Application Screenshot
+## 12. Retrieval Robustness Experiment
 
+A separate 15-question robustness experiment compared the production equal-weight Reciprocal Rank Fusion (RRF) retriever with a CrossEncoder reranking approach. The results are recorded in `eval/reranking_comparison_final.csv`.
+
+| Metric | RRF | CrossEncoder |
+|---|---:|---:|
+| Top-3 any-section hit rate | 93.33% | 80.00% |
+| Top-5 any-section hit rate | 93.33% | 80.00% |
+| Top-10 any-section hit rate | 93.33% | 93.33% |
+| Complete expected-section coverage at top-10 | 86.67% | 93.33% |
+| Average expected-section coverage at top-10 | 91.11% | 93.33% |
+
+RRF was retained for production retrieval because it performed better at top-3 and top-5, matching the application default of `top_k=3`. CrossEncoder had better complete and average expected-section coverage at top-10, but did not improve the top-3 or top-5 hit rates.
+
+One question about expense reimbursement (P05) did not retrieve the expected handbook section within the top 10 for either method. This remains a known retrieval weakness.
+
+These measurements describe retrieval ranking on this specific 15-question test set. They do not measure generated-answer correctness, citation entailment, or overall model quality. The section-coverage metric is based on expected handbook parent sections, not exact subsection-level answer validation.
+
+## Application Screenshot
 ### Application Interface
 ![Cited HR Policy Assistant](screenshots/cited_answer.png)
 

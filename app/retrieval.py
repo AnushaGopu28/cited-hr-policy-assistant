@@ -4,6 +4,7 @@
 import json
 import os
 import re
+from rank_bm25 import BM25Okapi
 from pathlib import Path
 
 import faiss
@@ -23,14 +24,16 @@ CANDIDATE_MULTIPLIER = 50
 MIN_CANDIDATES = 200
 
 _model = None
+_bm25 = None
+_bm25_signature = None
 
 STOP_WORDS = {
-    "who", "what", "when", "where", "why", "how",
+    "i", "who", "what", "when", "where", "why", "how",
     "is", "are", "was", "were", "the", "a", "an",
     "of", "for", "to", "in", "on", "at", "by",
     "and", "or", "can", "do", "does", "did",
     "be", "being", "been", "with", "from",
-    "should", "my", "your", "our", "their", "during",
+    "should", "my", "your", "our", "their", "during", "assignment",
     "include", "which", "this", "that"
 }
 
@@ -110,9 +113,25 @@ def tokenize(text):
         terms.update(SYNONYMS.get(normalized, set()))
 
     return sorted(terms)
+def bm25_tokenize(text):
+    """Tokenize text for BM25 with general synonym expansion."""
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    terms = []
 
-def keyword_score(query, text, section="", source_title=""):
-    """Score keyword overlap separately for passage text and metadata."""
+    for word in words:
+        if word in STOP_WORDS:
+            continue
+
+        normalized = normalize_word(word)
+        if normalized in STOP_WORDS:
+            continue
+
+        terms.append(normalized)
+        terms.extend(sorted(SYNONYMS.get(normalized, set())))
+
+    return terms
+def keyword_score(query, text, section="", source_title="", idf=None):
+    """Score keyword overlap using corpus-wide inverse document frequency."""
     query_terms = set(tokenize(query))
 
     if not query_terms:
@@ -122,19 +141,67 @@ def keyword_score(query, text, section="", source_title=""):
     section_terms = set(tokenize(section))
     source_terms = set(tokenize(source_title))
 
-    body_score = len(query_terms & body_terms) / len(query_terms)
-    section_score = len(query_terms & section_terms) / len(query_terms)
-    source_score = len(query_terms & source_terms) / len(query_terms)
+    if idf is None:
+        idf = {}
+
+    weights = {
+        term: idf.get(term, 1.0)
+        for term in query_terms
+    }
+
+    total_weight = sum(weights.values())
+
+    if total_weight == 0:
+        return 0.0
+
+    body_score = sum(
+        weights[term] for term in query_terms & body_terms
+    ) / total_weight
+
+    section_score = sum(
+        weights[term] for term in query_terms & section_terms
+    ) / total_weight
+
+    source_score = sum(
+        weights[term] for term in query_terms & source_terms
+    ) / total_weight
 
     return min(
-    1.0,
-    (0.70 * body_score)
-    + (0.20 * section_score)
-    + (0.10 * source_score)
+        1.0,
+        (0.70 * body_score)
+        + (0.20 * section_score)
+        + (0.10 * source_score)
     )
+def build_bm25(chunks):
+    """Build and reuse a BM25 index for approved document chunks."""
+    global _bm25, _bm25_signature
 
+    signature = hash(tuple(
+        (
+            chunk.get("chunk_id"),
+            chunk.get("text", ""),
+            chunk.get("section_or_page", ""),
+            chunk.get("source_title", "")
+        )
+        for chunk in chunks
+    ))
+
+    if _bm25 is None or _bm25_signature != signature:
+        tokenized_chunks = [
+            bm25_tokenize(
+                chunk.get("text", "") + " "
+                + chunk.get("section_or_page", "") + " "
+                + chunk.get("source_title", "")
+            )
+            for chunk in chunks
+        ]
+
+        _bm25 = BM25Okapi(tokenized_chunks)
+        _bm25_signature = signature
+
+    return _bm25
 def retrieve(query, top_k=None):
-    """Retrieve and rank passages using consistent hybrid scoring."""
+    """Retrieve passages using semantic search and BM25 rank fusion."""
     idx, chunks = load()
 
     if not chunks:
@@ -143,47 +210,63 @@ def retrieve(query, top_k=None):
     k = top_k if top_k is not None else TOP_K
     k = max(1, min(k, len(chunks)))
 
-    # Use the same candidate-pool rule for every question.
     candidate_k = min(
         len(chunks),
         max(k * CANDIDATE_MULTIPLIER, MIN_CANDIDATES)
     )
 
+    # Semantic search
     query_embedding = _model.encode(
         [query],
         normalize_embeddings=True
     )
 
-    semantic_scores, candidate_ids = idx.search(
+    semantic_scores, semantic_ids = idx.search(
         np.asarray(query_embedding, dtype="float32"),
         candidate_k
     )
 
+    semantic_rank = {
+        int(chunk_id): rank
+        for rank, chunk_id in enumerate(semantic_ids[0], start=1)
+        if chunk_id >= 0
+    }
+
+    # BM25 keyword search across the full approved corpus
+    bm25 = build_bm25(chunks)
+    query_tokens = bm25_tokenize(query)
+
+    bm25_scores = bm25.get_scores(query_tokens)
+
+    bm25_order = np.argsort(bm25_scores)[::-1][:candidate_k]
+
+    bm25_rank = {
+        int(chunk_id): rank
+        for rank, chunk_id in enumerate(bm25_order, start=1)
+    }
+
+    # Combine both rankings using Reciprocal Rank Fusion.
+    candidate_ids = set(semantic_rank) | set(bm25_rank)
     results = []
 
-    for semantic_score, chunk_index in zip(
-        semantic_scores[0],
-        candidate_ids[0]
-    ):
-        if chunk_index < 0:
-            continue
+    for chunk_id in candidate_ids:
+        item = dict(chunks[chunk_id])
 
-        item = dict(chunks[int(chunk_index)])
+        semantic_position = semantic_rank.get(chunk_id)
+        bm25_position = bm25_rank.get(chunk_id)
 
-        semantic = float(semantic_score)
-        lexical = keyword_score(
-    query,
-    item.get("text", ""),
-    item.get("section_or_page", ""),
-    item.get("source_title", "")
-)
+        fusion_score = 0.0
 
-        # General hybrid ranking: semantic similarity + keyword overlap.
-        combined = (0.50 * semantic) + (0.50 * lexical)
+        if semantic_position is not None:
+            fusion_score += 1.0 / (60 + semantic_position)
 
-        item["semantic_score"] = semantic
-        item["keyword_score"] = lexical
-        item["score"] = combined
+        if bm25_position is not None:
+            fusion_score += 1.0 / (60 + bm25_position)
+
+        item["semantic_rank"] = semantic_position
+        item["bm25_rank"] = bm25_position
+        item["bm25_score"] = float(bm25_scores[chunk_id])
+        item["score"] = fusion_score
 
         results.append(item)
 
@@ -192,22 +275,4 @@ def retrieve(query, top_k=None):
         reverse=True
     )
 
-    # Avoid returning the same source chunk more than once.
-    final_results = []
-    seen_chunk_ids = set()
-
-    for item in results:
-        chunk_id = item.get("chunk_id")
-
-        if chunk_id and chunk_id in seen_chunk_ids:
-            continue
-
-        if chunk_id:
-            seen_chunk_ids.add(chunk_id)
-
-        final_results.append(item)
-
-        if len(final_results) >= k:
-            break
-
-    return final_results
+    return results[:k]

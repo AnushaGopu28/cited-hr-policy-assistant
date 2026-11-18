@@ -12,3 +12,4 @@ eval/run_outputs_before_q07_fix.csv
 corpus/*.pdf
 app/*_before*.py
 app/*_backup*.py
+index_chunk600/
