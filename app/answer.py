@@ -44,10 +44,9 @@ def determination_safety_response(question):
     ]):
         return (
             "I can't determine whether your specific work expense "
-            "is deductible on your personal tax return. That depends "
-            "on your individual circumstances. Please consult IRS "
-            "guidance or a qualified tax professional. "
-            "General information only; not tax advice."
+            "is deductible on your personal tax return. IRS Publication 463 explains that certain ordinary and necessary business travel expenses may qualify for deductions under specific rules. This general guidance does not determine whether your particular expense qualifies. "
+            "Please consult IRS guidance or a qualified tax professional. "
+            "General information only; not tax advice. [Source: IRS Publication 463, Chapter 1, What Travel Expenses Are Deductible]"
         )
 
     # Paid holiday entitlement
@@ -63,8 +62,8 @@ def determination_safety_response(question):
                 "The Pine Harbor Analytics Consultant Handbook does not "
                 "specify whether consultants receive paid holidays. "
                 "I can't determine your individual entitlement. "
-                "Please contact HR or Payroll to confirm the policy "
-                "that applies to your assignment."
+                "The handbook says holidays follow the project calendar, but does not specify which holidays are paid for every consultant or whether you personally qualify. Please contact HR or Payroll to confirm the calendar and policy "
+                "that applies to your assignment. General information only; not legal or employment advice. [Source: Pine Harbor Analytics Consultant Handbook, Section 3, Company holidays]"
             )
 
     # Other individual legal or employment determinations
