@@ -1,5 +1,5 @@
 metric,baseline_value,improved_value,change,method_or_notes
-retrieval_hit_rate,56%,100%,+44 percentage points,"Baseline: 14/25 hits; final: 25/25 hits."
-average_groundedness,Not scored,100%,Not comparable,"Final: 50/50; baseline scoring fields were blank."
-average_relevance,Not scored,100%,Not comparable,"Final: 50/50; baseline scoring fields were blank."
-refusal_correctness_rate,Not scored,100%,Not comparable,"Final: 11/11 applicable refusal cases; baseline scoring fields were blank."
+retrieval_hit_rate,56%,100%,+44 percentage points,"Baseline: 14/25 expected-source hits; final: 25/25 expected-source hits."
+average_groundedness,Not scored,Not scored,Not comparable,"No completed numeric groundedness scoring records were found in the evaluation CSV files inspected."
+average_relevance,Not scored,Not scored,Not comparable,"No completed numeric relevance scoring records were found in the evaluation CSV files inspected."
+refusal_correctness_rate,Not scored,Not scored,Not comparable,"Ten separate manual checks are recorded as qualitative PASS; no completed numeric refusal scoring table was found."
