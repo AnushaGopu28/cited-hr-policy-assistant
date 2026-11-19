@@ -15,7 +15,6 @@ def determination_safety_response(question):
     """Prevent personal legal, tax, payroll, and employment determinations."""
 
     q = question.lower()
-
     # Personal paycheck calculations
     if any(term in q for term in [
         "net paycheck",
@@ -44,9 +43,9 @@ def determination_safety_response(question):
     ]):
         return (
             "I can't determine whether your specific work expense "
-            "is deductible on your personal tax return. IRS Publication 463 explains that certain ordinary and necessary business travel expenses may qualify for deductions under specific rules. This general guidance does not determine whether your particular expense qualifies. "
+            "is deductible on your personal tax return. IRS Publication 463 states that personal expenses are not deductible and explains rules for certain business travel expenses. Whether your expense qualifies depends on its nature and the applicable tax rules. "
             "Please consult IRS guidance or a qualified tax professional. "
-            "General information only; not tax advice. [Source: IRS Publication 463, Chapter 1, What Travel Expenses Are Deductible]"
+            "General information only; not tax advice. [Source: Publication 463, Travel, Gift, and Car Expenses, web chunk 295]"
         )
 
     # Paid holiday entitlement
@@ -63,7 +62,7 @@ def determination_safety_response(question):
                 "specify whether consultants receive paid holidays. "
                 "I can't determine your individual entitlement. "
                 "The handbook says holidays follow the project calendar, but does not specify which holidays are paid for every consultant or whether you personally qualify. Please contact HR or Payroll to confirm the calendar and policy "
-                "that applies to your assignment. General information only; not legal or employment advice. [Source: Pine Harbor Analytics Consultant Handbook, Section 3, Company holidays]"
+                "that applies to your assignment. General information only; not legal or employment advice. [Source: Pine Harbor Analytics Consultant Handbook, Company holidays]"
             )
 
     # Other individual legal or employment determinations
@@ -350,7 +349,7 @@ def local_answer(question, passages):
                 "requires submission within 30 calendar days of the transaction."
             )
         else:
-            answer = FALLBACK   
+            answer = FALLBACK
 
     elif "first week" in q:
         evidence = next((x.get("text", "") for x in best if x.get("section_or_page", "").lower() == "first-week checklist" and "welcome email" in x.get("text", "").lower() and "security training" in x.get("text", "").lower()), "")
@@ -363,7 +362,7 @@ def local_answer(question, passages):
         bonus_evidence = any(
             "does not specify a universal first-week completion bonus"
             in p.get("text", "").lower()
-    
+
             for p in best
         )
 
@@ -513,7 +512,69 @@ def local_answer(question, passages):
         "Sources:\n"
         + "\n".join(citations)
     )
+def validate_citations(answer, passages):
+    """Validate citations against retrieved source metadata."""
 
+    # Reject mixed answers that contain the required refusal.
+    if FALLBACK in answer:
+        return None
+
+    valid_sources = {
+        (
+            p.get("source_title", ""),
+            p.get("section_or_page", "")
+        )
+        for p in passages
+        if p.get("source_title") and p.get("section_or_page")
+    }
+
+    citations = list(re.finditer(r"\[Source:\s*(.*?)\]", answer))
+
+    if not citations:
+        return None
+
+    for match in reversed(citations):
+        citation_text = match.group(1).strip()
+        matched_source = None
+
+        for title, section in valid_sources:
+            prefix = f"{title}, "
+
+            if not citation_text.startswith(prefix):
+                continue
+
+            cited_section = citation_text[len(prefix):].strip()
+
+            # Accept harmless variations in section formatting.
+            cited_section = re.sub(
+                r"^(?:section|page)\s+",
+                "",
+                cited_section,
+                flags=re.IGNORECASE
+            ).strip().strip("\"'")
+
+            if cited_section.casefold() == section.casefold():
+                matched_source = (title, section)
+                break
+
+            # Accept additional citation details after a valid section.
+            if citation_text.startswith(f"{title}, {section},"):
+                matched_source = (title, section)
+                break
+
+        if matched_source is None:
+            return None
+
+        title, section = matched_source
+        corrected = f"[Source: {title}, {section}]"
+
+        answer = (
+            answer[:match.start()]
+            + corrected
+            + answer[match.end():]
+        )
+
+    return answer
 def answer_question(question, passages):
     safety_response = determination_safety_response(question)
     if safety_response:
@@ -523,6 +584,20 @@ def answer_question(question, passages):
         return FALLBACK
 
     q = question.lower()
+    # Do not infer email addresses from general contact information.
+    if re.search(r"\b(email address|email of|email for|contact email)\b", q):
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"
+
+        has_email = any(
+            re.search(
+                email_pattern,
+                str(p.get("text", p.get("content", "")))
+            )
+            for p in passages
+        )
+
+        if not has_email:
+            return FALLBACK
 
     if (
         "hotel" in q
@@ -608,7 +683,12 @@ def answer_question(question, passages):
         if not answer or answer.startswith(FALLBACK):
             return FALLBACK
 
-        return answer
+        validated_answer = validate_citations(answer, passages)
+
+        if validated_answer is None:
+            return FALLBACK
+
+        return validated_answer
 
     except requests.exceptions.RequestException as exc:
         return (

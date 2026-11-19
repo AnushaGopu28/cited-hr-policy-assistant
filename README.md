@@ -271,7 +271,7 @@ The evaluation includes automated retrieval checks, live local Ollama answer gen
 
 - **Retrieval hits (25/25):** Every question retrieved at least one expected source in the recorded retrieval evaluation. This does not prove that every generated answer is correct.
 
-- **Live Ollama evaluation (25 questions):** The fresh request-tracked run recorded 14 non-fallback Ollama responses, 4 Ollama fallback responses, 1 pre-model fallback, and 6 deterministic safety responses. The request-tracking results are recorded in `eval/run_outputs_ollama_fresh.csv`. The manually scored results are recorded separately in `eval/run_outputs_ollama.csv`. The CSV includes recorded manual scores for all 25 pipeline outputs: average groundedness 1.76/2, relevance 1.88/2, and citation correctness 0.56/1. Refusal correctness is 1.00/1 across 11 applicable cases. These are manual scores, not independently audited, and include fallback and deterministic safety responses—not only actual Ollama-generated answers.
+- **Live Ollama evaluation (25 questions):** The fresh request-tracked run recorded 14 non-fallback Ollama responses, 3 Ollama fallback responses, 2 pre-model fallbacks, and 6 deterministic safety responses. The request-tracking results are recorded in `eval/run_outputs_ollama_fresh.csv`. The manually scored results are recorded separately in `eval/run_outputs_ollama.csv`. The CSV includes recorded manual scores for all 25 pipeline outputs: average groundedness 1.76/2, relevance 1.88/2, and citation correctness 0.56/1. Refusal correctness is 1.00/1 across 11 applicable cases. These are manual scores, not independently audited, and include fallback and deterministic safety responses—not only actual Ollama-generated answers.
 
 - **Manual answer checks (10/10 PASS):** Ten selected answers were manually checked and marked PASS in `eval/manual_answer_checks.csv`. These are qualitative pass/fail checks, not a numeric groundedness or relevance score across all 25 questions.
 
@@ -285,9 +285,26 @@ The retrieval baseline was 14/25 (56%). The improved retrieval result was 25/25 
 
 These results describe the specific test datasets and checks recorded in this repository. They do not establish production readiness or guarantee performance on other questions or documents.
 
+### Retrieval Reranking Experiments
+
+Additional experiments compared the production hybrid Reciprocal Rank Fusion (RRF) retriever with cross-encoder reranking and handbook-specific ranking bonuses.
+
+The experiment used 15 handbook-focused robustness questions and 3 public-source questions. The results below measure whether the expected source appeared within the top 3 or top 10 retrieved results.
+
+| Retrieval method | Handbook top 3 | Handbook top 10 | Public-source top 3 | Public-source top 10 |
+|---|---:|---:|---:|---:|
+| Original hybrid RRF | 14/15 | 14/15 | 3/3 | 3/3 |
+| Cross-encoder, text only | 12/15 | 14/15 | 3/3 | 3/3 |
+| Cross-encoder, metadata and text | 11/15 | 13/15 | 3/3 | 3/3 |
+| Handbook bonus 0.5 | 15/15 | 15/15 | 2/3 | 3/3 |
+| Handbook bonus 1.0 | 15/15 | 15/15 | 0/3 | 1/3 |
+
+**Decision:** The original hybrid RRF method was retained as the production baseline. Cross-encoder reranking reduced handbook top-3 retrieval performance. Handbook-specific bonuses improved handbook results but degraded retrieval for public sources, indicating that a source-specific boost could introduce ranking bias.
+
+The experiment results are recorded in `eval/retrieval_reranking_experiment_comparison.csv`. These are limited retrieval experiments, not a comprehensive evaluation of answer correctness, citation quality, or overall RAG performance. The test set is small, particularly the three public-source questions, so the results should be interpreted cautiously.
 
 
-\## 7. Local Ollama Model and AI Disclosure
+## 7. Local Ollama Model and AI Disclosure
 
 
 
@@ -317,7 +334,7 @@ The project also retains a rule-based local test mode. Rule-based responses and 
 
 
 
-The fresh request-tracked evaluation processed 25 questions: 14 produced non-fallback Ollama responses, 4 produced Ollama fallback responses, 1 used a pre-model fallback, and 6 used deterministic safety responses. The detailed results are saved in `eval/run_outputs_ollama_fresh.csv`.
+The fresh request-tracked evaluation processed 25 questions: 14 produced non-fallback Ollama responses, 3 produced Ollama fallback responses, 2 used pre-model fallbacks, and 6 used deterministic safety responses. The detailed results are saved in `eval/run_outputs_ollama_fresh.csv`.
 
 
 
@@ -419,7 +436,7 @@ The recorded evaluation and testing results are:
 
 - **Retrieval evaluation:** 25/25 expected-source hits (100%), compared with the baseline of 14/25 (56%).
 
-- **Live Ollama evaluation:** 25 questions processed: 14 non-fallback Ollama responses, 4 Ollama fallback responses, 1 pre-model fallback, and 6 deterministic safety responses. Recorded manual scores are available for all 25 pipeline outputs. Independent validation of these scores and separate quality analysis of the 14 non-fallback Ollama responses remain pending.
+- **Live Ollama evaluation:** 25 questions processed: 14 non-fallback Ollama responses, 3 Ollama fallback responses, 2 pre-model fallbacks, and 6 deterministic safety responses. Recorded manual scores are available for all 25 pipeline outputs. Independent validation of these scores and separate quality analysis of the 14 non-fallback Ollama responses remain pending.
 
 - **Manual answer checks:** 10 selected answers manually reviewed and marked PASS (10/10). These are qualitative checks, not numeric groundedness or relevance scores.
 

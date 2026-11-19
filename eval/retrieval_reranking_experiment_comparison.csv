@@ -1,0 +1,6 @@
+method,handbook_questions,handbook_top3,handbook_top10,public_questions,public_top3,public_top10,decision
+Original hybrid RRF,15,14,14,3,3,3,Retain as production baseline
+Cross-encoder text only,15,12,14,3,3,3,Reject - lower handbook top3
+Cross-encoder metadata and text,15,11,13,3,3,3,Reject - lower handbook top3 and top10
+Handbook bonus 0.5,15,15,15,3,2,3,Reject - public source ranking degraded
+Handbook bonus 1.0,15,15,15,3,0,1,Reject - public source ranking severely degraded
