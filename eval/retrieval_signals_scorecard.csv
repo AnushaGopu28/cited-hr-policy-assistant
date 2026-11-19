@@ -1,0 +1,46 @@
+﻿question_id,category,method,top3_hit,top3_matched_sections,top5_hit,top5_matched_sections,top10_hit,top10_matched_sections
+P01,paraphrase,Semantic,1,Corrections and records ; Recording time,1,Corrections and records ; Recording time,1,Corrections and records ; Every workweek ; Recording time
+P01,paraphrase,BM25,0,,0,,1,Corrections and records ; Recording time
+P01,paraphrase,Current_RRF,1,Recording time,1,Corrections and records ; Recording time,1,Corrections and records ; Recording time
+P02,paraphrase,Semantic,0,,1,Submission deadline,1,Every workweek ; Submission deadline
+P02,paraphrase,BM25,1,Pay schedule,1,Every workweek ; Pay schedule ; Submission deadline,1,Every workweek ; Pay schedule ; Submission deadline
+P02,paraphrase,Current_RRF,1,Submission deadline,1,Every workweek ; Pay schedule ; Submission deadline,1,Every workweek ; Pay schedule ; Submission deadline
+P03,paraphrase,Semantic,1,Every workweek ; Recording time,1,Corrections and records ; Every workweek ; Recording time,1,Corrections and records ; Every workweek ; Recording time
+P03,paraphrase,BM25,1,Every workweek ; Recording time,1,Every workweek ; Recording time,1,Every workweek ; Recording time
+P03,paraphrase,Current_RRF,1,Every workweek ; Recording time,1,Every workweek ; Recording time,1,Corrections and records ; Every workweek ; Recording time
+P04,paraphrase,Semantic,1,Payroll questions,1,Payroll questions,1,Pay schedule ; Payroll questions
+P04,paraphrase,BM25,0,,0,,0,
+P04,paraphrase,Current_RRF,1,Pay schedule,1,Pay schedule,1,Pay schedule ; Payroll questions
+P05,paraphrase,Semantic,0,,0,,1,Review and payment
+P05,paraphrase,BM25,0,,0,,0,
+P05,paraphrase,Current_RRF,0,,0,,0,
+P06,paraphrase,Semantic,1,Before buying ; Submitting an expense,1,Before buying ; Review and payment ; Submitting an expense,1,Before buying ; Receipts and records ; Review and payment ; Submitting an expense
+P06,paraphrase,BM25,1,Before buying,1,Before buying ; Submitting an expense,1,Before buying ; Submitting an expense
+P06,paraphrase,Current_RRF,1,Before buying ; Submitting an expense,1,Before buying ; Submitting an expense,1,Before buying ; Review and payment ; Submitting an expense
+P07,paraphrase,Semantic,1,Approval before spending,1,Approval before spending,1,Approval before spending
+P07,paraphrase,BM25,0,,1,Approval before spending ; Before buying,1,Approval before spending ; Before buying
+P07,paraphrase,Current_RRF,1,Approval before spending,1,Approval before spending,1,Approval before spending ; Before buying
+P08,paraphrase,Semantic,1,Company equipment ; Urgent security incident,1,Company equipment ; Device security ; Urgent security incident,1,Company equipment ; Device security ; Escalation order ; Urgent security incident
+P08,paraphrase,BM25,1,Company equipment ; Software and access,1,Company equipment ; Software and access,1,Company equipment ; Software and access
+P08,paraphrase,Current_RRF,1,Company equipment ; Software and access,1,Company equipment ; Software and access ; Urgent security incident,1,Company equipment ; Device security ; Software and access ; Urgent security incident
+P09,paraphrase,Semantic,1,Data handling,1,Data handling,1,Data handling
+P09,paraphrase,BM25,1,Data handling,1,Data handling,1,Data handling
+P09,paraphrase,Current_RRF,1,Data handling,1,Data handling,1,Data handling
+P10,paraphrase,Semantic,1,Unexpected absence,1,Unexpected absence,1,Unexpected absence
+P10,paraphrase,BM25,1,Unexpected absence,1,Unexpected absence,1,Unexpected absence
+P10,paraphrase,Current_RRF,1,Unexpected absence,1,Unexpected absence,1,Unexpected absence
+C01,cross_policy,Semantic,1,Approval before spending ; Submitting an expense,1,Approval before spending ; Submitting an expense,1,Approval before spending ; Before buying ; Review and payment ; Submitting an expense
+C01,cross_policy,BM25,1,Before buying,1,Before buying ; Review and payment,1,Before buying ; Review and payment ; Submitting an expense
+C01,cross_policy,Current_RRF,1,Before buying ; Review and payment ; Submitting an expense,1,Approval before spending ; Before buying ; Review and payment ; Submitting an expense,1,Approval before spending ; Before buying ; Review and payment ; Submitting an expense
+C02,cross_policy,Semantic,1,Recording time ; Submission deadline ; Urgent security incident,1,Recording time ; Submission deadline ; Urgent security incident,1,Device security ; Escalation order ; Every workweek ; Payroll questions ; Recording time ; Submission deadline ; Urgent security incident
+C02,cross_policy,BM25,1,Submission deadline,1,Escalation order ; Every workweek ; Submission deadline,1,Escalation order ; Every workweek ; Pay schedule ; Submission deadline
+C02,cross_policy,Current_RRF,1,Every workweek ; Submission deadline,1,Escalation order ; Every workweek ; Recording time ; Submission deadline,1,Escalation order ; Every workweek ; Pay schedule ; Recording time ; Submission deadline
+C03,cross_policy,Semantic,1,Coverage and handoff ; Unexpected absence,1,Coverage and handoff ; Ergonomics and safety ; Unexpected absence,1,Coverage and handoff ; Ergonomics and safety ; Meetings and availability ; Unexpected absence ; Urgent security incident
+C03,cross_policy,BM25,1,Requesting planned time away ; Unexpected absence,1,Meetings and availability ; Requesting planned time away ; Unexpected absence,1,Meetings and availability ; Requesting planned time away ; Unexpected absence
+C03,cross_policy,Current_RRF,1,Meetings and availability ; Unexpected absence,1,Ergonomics and safety ; Meetings and availability ; Requesting planned time away ; Unexpected absence,1,Coverage and handoff ; Ergonomics and safety ; Meetings and availability ; Remote-work approval ; Requesting planned time away ; Unexpected absence ; Urgent security incident
+C04,cross_policy,Semantic,1,Every workweek,1,Every workweek ; Recording time,1,Every workweek ; Recording time ; Submitting an expense
+C04,cross_policy,BM25,1,Every workweek,1,Every workweek ; Submitting an expense,1,Every workweek ; Recording time ; Submission deadline ; Submitting an expense
+C04,cross_policy,Current_RRF,1,Every workweek,1,Every workweek ; Submitting an expense,1,Corrections and records ; Every workweek ; Recording time ; Submission deadline ; Submitting an expense
+C05,cross_policy,Semantic,1,Before starting ; First-week checklist,1,Before starting ; First-week checklist ; Helpful question to HR,1,Before starting ; Day 1 ; First-week checklist ; Helpful question to HR ; Identity and payroll forms
+C05,cross_policy,BM25,1,First-week checklist,1,First-week checklist,1,Day 1 ; First-week checklist
+C05,cross_policy,Current_RRF,1,Before starting ; First-week checklist,1,Before starting ; Day 1 ; First-week checklist ; Identity and payroll forms,1,Before starting ; Day 1 ; End of week ; First-week checklist ; Identity and payroll forms
