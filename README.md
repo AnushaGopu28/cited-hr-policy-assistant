@@ -256,16 +256,13 @@ The evaluation includes automated retrieval checks, live local Ollama answer gen
 
 | Retrieval hits | 25/25 (100%) |
 
-| Live Ollama answers generated | 25 |
+| Questions processed by the live evaluation pipeline | 25 |
+| Non-fallback Ollama responses in fresh request-tracked run | 14 |
 
-| Live Ollama answers with completed numeric quality scores | 0/25 |
-
-| Separate manual answer checks | 10 |
-
-| Manual answer checks marked PASS | 10/10 |
-
-| Live Ollama security tests recorded as passing | 4/4 |
-
+| Rows with recorded manual numeric scores | 25/25 |
+| Average groundedness (0–2) | 1.76 |
+| Average relevance (0–2) | 1.88 |
+| Average citation correctness (0–1) | 0.56 |
 
 
 \### How to interpret the results
@@ -274,7 +271,7 @@ The evaluation includes automated retrieval checks, live local Ollama answer gen
 
 - **Retrieval hits (25/25):** Every question retrieved at least one expected source in the recorded retrieval evaluation. This does not prove that every generated answer is correct.
 
-- **Live Ollama generation (25 answers):** The local `llama3.2:3b` model generated answers through the application pipeline. These answers are recorded in `eval/run_outputs_ollama.csv`; their numeric groundedness, relevance, citation, and refusal scores remain pending independent review.
+- **Live Ollama evaluation (25 questions):** The fresh request-tracked run recorded 14 non-fallback Ollama responses, 4 Ollama fallback responses, 1 pre-model fallback, and 6 deterministic safety responses. The request-tracking results are recorded in `eval/run_outputs_ollama_fresh.csv`. The manually scored results are recorded separately in `eval/run_outputs_ollama.csv`. The CSV includes recorded manual scores for all 25 pipeline outputs: average groundedness 1.76/2, relevance 1.88/2, and citation correctness 0.56/1. Refusal correctness is 1.00/1 across 11 applicable cases. These are manual scores, not independently audited, and include fallback and deterministic safety responses—not only actual Ollama-generated answers.
 
 - **Manual answer checks (10/10 PASS):** Ten selected answers were manually checked and marked PASS in `eval/manual_answer_checks.csv`. These are qualitative pass/fail checks, not a numeric groundedness or relevance score across all 25 questions.
 
@@ -282,7 +279,7 @@ The evaluation includes automated retrieval checks, live local Ollama answer gen
 
 
 
-The retrieval baseline was 14/25 (56%). The improved retrieval result was 25/25 (100%), an increase of 44 percentage points. Answer-quality scores were not available for a comparable before-and-after numeric evaluation.
+The retrieval baseline was 14/25 (56%). The improved retrieval result was 25/25 (100%), an increase of 44 percentage points. The before-and-after comparison covers retrieval performance only; comparable before-and-after answer-quality scores were not collected.
 
 
 
@@ -320,7 +317,7 @@ The project also retains a rule-based local test mode. Rule-based responses and 
 
 
 
-Twenty-five live Ollama answers were generated and saved in `eval/run_outputs_ollama.csv`. Their numeric groundedness, relevance, citation, and refusal scores remain pending independent review.
+The fresh request-tracked evaluation processed 25 questions: 14 produced non-fallback Ollama responses, 4 produced Ollama fallback responses, 1 used a pre-model fallback, and 6 used deterministic safety responses. The detailed results are saved in `eval/run_outputs_ollama_fresh.csv`.
 
 
 
@@ -370,7 +367,7 @@ Security test cases are maintained in `eval/security_tests.csv`. Listing a test 
 
 - One public source failed to download during the recorded ingestion run.
 
-- The project supports both rule-based local test mode and live Ollama generation. Numeric quality evaluation of all live Ollama answers remains pending.
+- The project supports both rule-based local test mode and live Ollama generation. Recorded manual scores cover all 25 pipeline outputs; independent validation of these scores and separate quality analysis of the 14 non-fallback Ollama responses remain pending.
 
 - Evaluation results are based on a limited set of 25 questions.
 
@@ -390,7 +387,7 @@ Potential improvements include:
 
 - Expand the evaluation set with additional answerable, unanswerable, and determination questions.
 
-- Complete independent numeric quality scoring of the generated live Ollama answers.
+- Independently validate the recorded manual scores and separately evaluate the 14 non-fallback Ollama responses.
 
 - Improve retrieval quality through measured chunk-size and `top_k` comparisons.
 
@@ -422,7 +419,7 @@ The recorded evaluation and testing results are:
 
 - **Retrieval evaluation:** 25/25 expected-source hits (100%), compared with the baseline of 14/25 (56%).
 
-- **Live Ollama generation:** 25 answers generated using the local `llama3.2:3b` model. Numeric answer-quality scores remain pending independent review.
+- **Live Ollama evaluation:** 25 questions processed: 14 non-fallback Ollama responses, 4 Ollama fallback responses, 1 pre-model fallback, and 6 deterministic safety responses. Recorded manual scores are available for all 25 pipeline outputs. Independent validation of these scores and separate quality analysis of the 14 non-fallback Ollama responses remain pending.
 
 - **Manual answer checks:** 10 selected answers manually reviewed and marked PASS (10/10). These are qualitative checks, not numeric groundedness or relevance scores.
 
